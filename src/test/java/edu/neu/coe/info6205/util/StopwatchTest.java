@@ -25,6 +25,7 @@ public class StopwatchTest {
             Thread.sleep(10);
             System.out.println(target.lap());
         } catch (InterruptedException ignored) {
+
         }
     }
 
