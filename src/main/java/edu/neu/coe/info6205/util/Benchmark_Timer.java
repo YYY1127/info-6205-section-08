@@ -4,6 +4,10 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.SortWithHelper;
+import edu.neu.coe.info6205.sort.elementary.InsertionSort;
+
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -125,4 +129,87 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     private final Consumer<T> fPost;
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
+
+    public static Integer[] random(int n)
+    {
+        Random random=new Random();
+        Integer[] nums=new Integer[n];
+        for(int i=0;i<n;i++){
+            nums[i]=random.nextInt(1000);
+        }
+        return nums;
+    }
+
+    public static Integer[] ordered(int n)
+    {
+        Integer[] nums=new Integer[n];
+        for(int i=0;i<n;i++){
+            nums[i]=i+10;
+        }
+        return nums;
+    }
+
+    public static Integer[] partially(int n)
+    {
+        Integer[] nums = random(n);
+        InsertionSort<Integer> is=new InsertionSort<>();
+
+        is.sort(nums,0,n/2);
+
+        return nums;
+    }
+
+    public static Integer[] reverse(int n)
+    {
+        Integer[] nums=new Integer[n];
+        for(int i=0;i<n;i++){
+            nums[i]=-1*i;
+        }
+        return nums;
+    }
+    public static double benchmarkSort(Integer[] nums)
+    {
+        SortWithHelper<Integer> helper=new InsertionSort<>();
+        Timer timer=new Timer();
+        double times = timer.repeat(50, () -> {
+            return 100;
+        }, t -> {
+            helper.sort(nums);
+            return 1;
+        });
+
+        return times;
+
+    }
+
+    public static void main(String[] args) {
+
+        int t=100;
+        for(int i=0;i<10;i++)
+        {
+            System.out.println("================================");
+            System.out.println("The length of the nums is "+t);
+
+            Integer[] ordered=ordered(t);
+            double value1 = benchmarkSort(ordered);
+            System.out.println("The ordered array takes "+ value1 );
+
+
+            Integer[] random=random(t);
+            double value2 = benchmarkSort(random);
+            System.out.println("The random array takes "+ value2 );
+
+            Integer[] part=partially(t);
+            double value3 = benchmarkSort(part);
+            System.out.println("The part array takes "+ value3 );
+
+            Integer[] reverse=reverse(t);
+            double value4 = benchmarkSort(reverse);
+            System.out.println("The reverse array takes "+ value4 );
+
+            t=t*2;
+
+        }
+
+    }
 }
