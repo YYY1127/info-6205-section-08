@@ -8,6 +8,8 @@
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Height-weighted Quick Union with Path Compression
@@ -80,10 +82,15 @@ public class UF_HWQUPC implements UF {
      */
     public int find(int p) {
         validate(p);
-        int root = p;
         // FIXME
-        // END 
-        return root;
+        while (p != parent[p]) {
+            if (this.pathCompression) {
+                doPathCompression(p);
+            }
+            p = parent[p];
+        }
+        return p;
+        // END
     }
 
     /**
@@ -170,6 +177,17 @@ public class UF_HWQUPC implements UF {
 
     private void mergeComponents(int i, int j) {
         // FIXME make shorter root point to taller one
+
+        if (i == j) return;
+
+        if (height[i] < height[j]) {
+            parent[i] = j;
+            height[j] += height[j];
+        }
+        else {
+            parent[j] = i;
+            height[i] += height[j];
+        }
         // END 
     }
 
@@ -178,6 +196,45 @@ public class UF_HWQUPC implements UF {
      */
     private void doPathCompression(int i) {
         // FIXME update parent to value of grandparent
+        parent[i] = parent[parent[i]];
         // END 
+    }
+    public static void main(String[] args) {
+        {
+            int runs = 20;
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the number of sites");
+            while(sc.hasNext()) {
+                int N = sc.nextInt();
+                if(N == 0){
+                    System.exit(0);
+                }
+                int count =0;
+                for(int i=0;i<runs;i++) {
+                    count+= count(N);
+                }
+
+                int avg = count/runs;
+                System.out.println("the number of connections generated :" + avg);
+                System.out.println("==============================================================");
+                System.out.println("Enter the number of sites");
+            }
+
+
+        }
+    }
+    private static int count(int n) {
+        int nums = 0;
+        UF_HWQUPC uf = new UF_HWQUPC(n);
+        Random r = new Random();
+        while(uf.count>1){
+            int p = r.nextInt(n);
+            int q = r.nextInt(n);
+            if(!uf.connected(p,q)){
+                uf.union(p,q);
+            }
+            nums += 1;
+        }
+        return nums;
     }
 }
