@@ -6,10 +6,6 @@ package edu.neu.coe.info6205.symbolTable.tree;
 
 import edu.neu.coe.info6205.bqs.Queue;
 import edu.neu.coe.info6205.bqs.Queue_Elements;
-import edu.neu.coe.info6205.symbolTable.tree.BST;
-import edu.neu.coe.info6205.symbolTable.tree.BSTSimple;
-import edu.neu.coe.info6205.symbolTable.tree.BstDetail;
-import edu.neu.coe.info6205.util.PrivateMethodTester;
 import org.junit.Test;
 
 import java.util.HashMap;

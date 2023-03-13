@@ -1,6 +1,5 @@
 package edu.neu.coe.info6205.pq;
 
-import edu.neu.coe.info6205.util.PrivateMethodTester;
 import org.junit.Test;
 
 import java.util.Comparator;

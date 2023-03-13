@@ -10,7 +10,6 @@ import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.InstrumentedHelper;
 import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.LazyLogger;
-import edu.neu.coe.info6205.util.PrivateMethodTester;
 import edu.neu.coe.info6205.util.StatPack;
 import org.junit.BeforeClass;
 import org.junit.Test;

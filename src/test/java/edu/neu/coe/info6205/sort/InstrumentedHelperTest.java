@@ -2,7 +2,6 @@ package edu.neu.coe.info6205.sort;
 
 import edu.neu.coe.info6205.sort.linearithmic.MergeSort;
 import edu.neu.coe.info6205.util.Config;
-import edu.neu.coe.info6205.util.PrivateMethodTester;
 import edu.neu.coe.info6205.util.StatPack;
 import edu.neu.coe.info6205.util.Statistics;
 import org.junit.BeforeClass;
